@@ -1,9 +1,11 @@
 package com.zk.studydemo.animation;
 
 import android.animation.ValueAnimator;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,8 +26,9 @@ public class ValueAnimationFragment extends Fragment {
 
 
     Unbinder unbinder;
-    @BindView(R.id.tv_frame)
-    TextView mTvFrame;
+    @BindView(R.id.tv_value)
+    TextView mTvValue;
+    private ValueAnimator mValueAnimator;
 
     public static Fragment newInstance() {
         ValueAnimationFragment fragment = new ValueAnimationFragment();
@@ -40,13 +43,21 @@ public class ValueAnimationFragment extends Fragment {
         unbinder = ButterKnife.bind(this, mView);
 
 
-        ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, 360);
-        valueAnimator.setDuration(2000);
-        valueAnimator.setInterpolator(new LinearInterpolator());
-        valueAnimator.setTarget(mTvFrame);
-        valueAnimator.setRepeatCount(ValueAnimator.INFINITE);
-        valueAnimator.setRepeatMode(ValueAnimator.RESTART);
-        valueAnimator.start();
+        ValueAnimator mValueAnimator = ValueAnimator.ofInt(0, 10, -10); //它会由0逐渐变化到10，在逐渐变化到-10
+        mValueAnimator.setDuration(5000);  //设置这一个过程的时长
+        mValueAnimator.setInterpolator(new LinearInterpolator()); //设置加速器为匀速
+        mValueAnimator.setRepeatCount(ValueAnimator.INFINITE);  //设置重复次数为无穷次
+        mValueAnimator.setRepeatMode(ValueAnimator.RESTART);  //设置重复模式 为 0% --> 100% --> 0%
+        mValueAnimator.start();  //开始
+
+        //添加变化的回调，每次变化的值都可以通过回调的animation的getAnimatedValue（）拿到
+        mValueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                Log.d("====", animation.getAnimatedValue() + "");
+                mTvValue.setText(String.valueOf(animation.getAnimatedValue()));
+            }
+        });
         return mView;
     }
 
@@ -54,5 +65,6 @@ public class ValueAnimationFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+        mValueAnimator.removeAllUpdateListeners();//移除所有的动画监听
     }
 }

@@ -21,7 +21,7 @@ import butterknife.Unbinder;
  */
 public class FrameAnimationFragment extends Fragment {
 
-    @BindView(R.id.tv_frame)
+    @BindView(R.id.tv_value)
     TextView mTvFrame;
     Unbinder unbinder;
 
