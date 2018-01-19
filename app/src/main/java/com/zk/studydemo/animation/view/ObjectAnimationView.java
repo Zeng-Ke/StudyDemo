@@ -1,5 +1,6 @@
 package com.zk.studydemo.animation.view;
 
+import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -17,7 +18,8 @@ import android.view.animation.LinearInterpolator;
  * author: ZK.
  * date:   On 2018/1/19.
  */
-public class ValueAnimationView extends View {
+public class ObjectAnimationView extends View {
+
 
     private @ColorInt
     int shaderStartColor = Color.parseColor("#0519FF00");
@@ -30,11 +32,12 @@ public class ValueAnimationView extends View {
     private int mRoateAngle;
     private Paint mPaint;
 
-
-    public ValueAnimationView(Context context, @Nullable AttributeSet attrs) {
+    public ObjectAnimationView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         initPaint();
     }
+
+
 
     private void initPaint() {
         mPaint = new Paint();
@@ -63,26 +66,32 @@ public class ValueAnimationView extends View {
         }
     }
 
+    private void startAnim() {
+        // "roateAngle" 一定要有 get，set方法。它变化的值会通过set方法回传
+        ObjectAnimator objectAnimator = ObjectAnimator.ofInt(this, "roateAngle", 0, 360);
+        objectAnimator.setDuration(2000);
+        objectAnimator.setInterpolator(new LinearInterpolator());
+        objectAnimator.setDuration(2000);
+        objectAnimator.setRepeatMode(ValueAnimator.RESTART);
+        objectAnimator.setRepeatCount(ValueAnimator.INFINITE);
+        objectAnimator.start();
+
+    }
+
+    //自定义属性getter方法
+    public int getRoateAngle() {
+        return mRoateAngle;
+    }
+
+    //自定义属性的setter方法
+    public void setRoateAngle(int roateAngle) {
+        mRoateAngle = roateAngle;
+        invalidate();
+    }
+
     public void drawCircle(Canvas canvas) {
         canvas.rotate(mRoateAngle);
         canvas.drawCircle(0, 0, Math.min(mWidth, mHeight) / 2, mPaint);
 
     }
-
-    private void startAnim() {
-        ValueAnimator valueAnimator = ValueAnimator.ofInt(0, 360);
-        valueAnimator.setInterpolator(new LinearInterpolator());
-        valueAnimator.setDuration(2000);
-        valueAnimator.setRepeatMode(ValueAnimator.RESTART);
-        valueAnimator.setRepeatCount(ValueAnimator.INFINITE);
-        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                mRoateAngle = (int) animation.getAnimatedValue();
-                invalidate();
-            }
-        });
-        valueAnimator.start();
-    }
-
 }

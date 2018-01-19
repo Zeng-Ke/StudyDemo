@@ -52,6 +52,9 @@ public class AnimationActivity extends BaseActivity {
         fragments.add(ValueAnimationFragment.newInstance());
         titles.add("ValueAnimation");
 
+        fragments.add(ObjectAnimationFragment.newInstance());
+        titles.add("ObjectAnimation");
+
         mViewpager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
             public Fragment getItem(int position) {
