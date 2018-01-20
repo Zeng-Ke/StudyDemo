@@ -1,5 +1,6 @@
 package com.zk.studydemo.animation;
 
+import android.animation.AnimatorSet;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -9,8 +10,13 @@ import android.support.v4.view.ViewPager;
 
 import com.zk.studydemo.BaseActivity;
 import com.zk.studydemo.R;
-import com.zk.studydemo.customview.CustomViewAvtivity;
-import com.zk.studydemo.customview.PageFragment;
+import com.zk.studydemo.animation.fragement.AnimatorSetFragment;
+import com.zk.studydemo.animation.fragement.FrameAnimationFragment;
+import com.zk.studydemo.animation.fragement.LaunchAnimationFragemnt;
+import com.zk.studydemo.animation.fragement.LayoutAnimationFragemnt;
+import com.zk.studydemo.animation.fragement.ObjectAnimationFragment;
+import com.zk.studydemo.animation.fragement.TweenAnimationFragment;
+import com.zk.studydemo.animation.fragement.ValueAnimationFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +60,9 @@ public class AnimationActivity extends BaseActivity {
 
         fragments.add(ObjectAnimationFragment.newInstance());
         titles.add("ObjectAnimation");
+
+        fragments.add(AnimatorSetFragment.newInstance());
+        titles.add("AnimatorSet");
 
         mViewpager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override

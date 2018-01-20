@@ -19,7 +19,7 @@
 
         <activity android:name=".customview.CustomViewAvtivity"/>
         <activity android:name=".animation.AnimationActivity"/>
-        <activity android:name=".animation.AnimEnterAndExistActivity"/>
+        <activity android:name=".animation.fragement.AnimEnterAndExistActivity"/>
     </application>
 
 </manifest>

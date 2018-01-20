@@ -1,7 +1,6 @@
-package com.zk.studydemo.animation;
+package com.zk.studydemo.animation.fragement;
 
 import android.animation.ValueAnimator;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -43,7 +42,8 @@ public class ValueAnimationFragment extends Fragment {
         unbinder = ButterKnife.bind(this, mView);
 
 
-        ValueAnimator mValueAnimator = ValueAnimator.ofInt(0, 10, -10); //它会由0逐渐变化到10，在逐渐变化到-10
+        //它会由0逐渐变化到10，在逐渐变化到-10
+        mValueAnimator = ValueAnimator.ofInt(0, 10, -10);
         mValueAnimator.setDuration(5000);  //设置这一个过程的时长
         mValueAnimator.setInterpolator(new LinearInterpolator()); //设置加速器为匀速
         mValueAnimator.setRepeatCount(ValueAnimator.INFINITE);  //设置重复次数为无穷次
@@ -65,6 +65,6 @@ public class ValueAnimationFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
-        mValueAnimator.removeAllUpdateListeners();//移除所有的动画监听
+        mValueAnimator.removeAllUpdateListeners();
     }
 }

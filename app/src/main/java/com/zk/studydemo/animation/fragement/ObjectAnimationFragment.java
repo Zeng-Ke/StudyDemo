@@ -1,6 +1,5 @@
-package com.zk.studydemo.animation;
+package com.zk.studydemo.animation.fragement;
 
-import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,7 +8,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationSet;
 import android.widget.TextView;
 
 import com.zk.studydemo.R;
